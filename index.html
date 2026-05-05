@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRILL MASTER | Flame-Grilled Perfection</title>
+    <meta name="description" content="Order the best flame-grilled burgers in town. Fast delivery, fresh ingredients, and unbeatable deals.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ff8a00;
+            --primary-hover: #e67a00;
+            --secondary: #f5ebdc;
+            --dark: #1a1a1a;
+            --dark-accent: #2d2d2d;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .btn-primary {
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 1px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            background: radial-gradient(circle at 70%, #333 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(4rem, 8vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-content span { color: var(--primary); }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 120%;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* --- Components --- */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 138, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            margin-left: 1rem;
+        }
+
+        /* --- Grid Layouts --- */
+        section { padding: 80px 5%; }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- Deal Cards --- */
+        .card {
+            background: var(--dark-accent);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card:hover { transform: translateY(-10px); }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content { padding: 1.5rem; }
+
+        .price-tag {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        /* --- Sticky Mobile CTA --- */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--primary);
+            padding: 1rem;
+            display: none;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        /* --- Animations --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            header nav { display: none; }
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .btn-outline { margin: 1rem 0 0 0; display: block; }
+            .sticky-cta { display: flex; }
+            section { padding-bottom: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">GRILL<span style="color:white">MASTER</span></a>
+        <nav>
+            <a href="#menu">Menu</a>
+            <a href="#deals">Deals</a>
+            <a href="#locations">Locations</a>
+            <a href="#loyalty" style="background:var(--primary); color:var(--dark); padding: 0.5rem 1rem; border-radius: 4px;">Join Rewards</a>
+        </nav>
+    </header>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="#" class="btn-primary" style="width: 90%; font-size: 1.2rem;">ORDER NOW - FAST DELIVERY</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The King of <br><span>Flame-Grilled</span></h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #ccc;">Experience the smokey, juicy taste of 100% Angus beef grilled over an open flame. Delivered to your door in 20 minutes.</p>
+            <div class="hero-btns">
+                <a href="#menu" class="btn btn-primary">Order Now</a>
+                <a href="#deals" class="btn btn-outline">View Deals</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Replace with actual high-res burger PNG -->
+            <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80" alt="Juicy Burger" id="mainBurger">
+        </div>
+    </section>
+
+    <!-- Featured Deals -->
+    <section id="deals" class="reveal">
+        <h2 class="section-title">Limited Time <span style="color: var(--primary);">Offers</span></h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=500&q=80" alt="Deal" class="card-img">
+                <div class="card-content">
+                    <span class="price-tag">$9.99</span>
+                    <h3>The Monster Meal</h3>
+                    <p>Large Burger, Fries, and a Shake. Save 20% today!</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1rem; font-size: 1rem; padding: 0.8rem;">Add to Order</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=500&q=80" alt="Deal" class="card-img">
+                <div class="card-content">
+                    <span class="price-tag">$5.00</span>
+                    <h3>BOGO Tuesdays</h3>
+                    <p>Buy one Double Flame-Grilled Burger, get one FREE.</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1rem; font-size: 1rem; padding: 0.8rem;">Claim Deal</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" alt="Deal" class="card-img">
+                <div class="card-content">
+                    <span class="price-tag">$12.99</span>
+                    <h3>Family Feast</h3>
+                    <p>4 Burgers, 2 Large Fries, 4 Drinks. The ultimate value.</p>
+                    <button class="btn-primary" style="width: 100%; margin-top: 1rem; font-size: 1rem; padding: 0.8rem;">Add to Order</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loyalty Signup -->
+    <section id="loyalty" style="background: var(--dark-accent); text-align: center;" class="reveal">
+        <h2 class="section-title">Get <span style="color: var(--primary);">10% OFF</span> Your First Order</h2>
+        <p style="margin-bottom: 2rem;">Join the Grill Club and start earning points for every bite.</p>
+        <div style="max-width: 500px; margin: 0 auto; display: flex; gap: 10px;">
+            <input type="email" placeholder="Enter your email" style="flex: 1; padding: 1rem; border-radius: 4px; border: none;">
+            <button class="btn-primary" style="padding: 1rem 2rem;">JOIN NOW</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 4rem 5% 6rem; border-top: 1px solid rgba(255,255,255,0.1); background: #111;">
+        <div class="grid">
+            <div>
+                <h3>GRILL MASTER</h3>
+                <p>Global flavor, flame-grilled heart.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <p>Privacy Policy</p>
+                <p>Terms of Service</p>
+                <p>Nutritional Info</p>
+            </div>
+            <div>
+                <h4>Follow Us</h4>
+                <div style="font-size: 1.5rem; display: flex; gap: 15px; margin-top: 10px;">
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-tiktok"></i>
+                    <i class="fab fa-twitter"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth Scroll for Nav Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple Cart Logic Micro-interaction
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                if(this.innerText === "Add to Order" || this.innerText === "Claim Deal") {
+                    const originalText = this.innerText;
+                    this.innerText = "✓ Added!";
+                    this.style.background = "#2ecc71";
+                    setTimeout(() => {
+                        this.innerText = originalText;
+                        this.style.background = "";
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
